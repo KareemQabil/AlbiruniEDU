@@ -18,6 +18,9 @@
     "db:migrate": "supabase db push",
     "db:seed": "tsx scripts/seed-db.ts",
     "db:types": "supabase gen types typescript --local > src/types/supabase.ts",
+    "deploy": "bash scripts/deploy.sh",
+    "deploy:prod": "vercel --prod",
+    "deploy:preview": "vercel",
     "prepare": "husky install"
   },
   "dependencies": {

@@ -1,0 +1,40 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["iad1"],
+  "git": {
+    "deploymentEnabled": true
+  },
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://loqhjfpuqjcwsgbfvpkr.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_GpUe5IK5SJJHyvKjvzk2cw_M9nKHmR9"
+  },
+  "build": {
+    "env": {
+      "GEMINI_API_KEY": "@gemini-api-key",
+      "NEXT_PUBLIC_SUPABASE_URL": "@supabase-url",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase-anon-key"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}
