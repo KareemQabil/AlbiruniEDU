@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { IBM_Plex_Sans_Arabic, Almarai } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from '@/components/ui/toast';
 import '@/styles/globals.css';
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
@@ -86,6 +87,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
