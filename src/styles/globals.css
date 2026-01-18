@@ -1,0 +1,374 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 187 100% 42%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom variables */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    /* Arabic font sizes */
+    --text-xs: 0.875rem;
+    --text-sm: 1rem;
+    --text-base: 1.125rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-3xl: 2.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 187 100% 42%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 38 92% 50%;
+
+    --glass-bg: rgba(0, 0, 0, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-ibm-plex), system-ui, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+
+  /* Arabic text styling */
+  [dir='rtl'] {
+    font-family: var(--font-ibm-plex), system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-almarai), system-ui, sans-serif;
+    font-weight: 700;
+  }
+
+  /* Improved Arabic readability */
+  p, li, span {
+    line-height: 1.8;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary/20 text-primary-foreground;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer components {
+  /* Glass morphism utilities */
+  .glass-card {
+    @apply glass rounded-lg p-6;
+  }
+
+  .glass-panel {
+    @apply glass rounded-xl p-8;
+  }
+
+  .glass-hover-card {
+    @apply glass glass-hover rounded-lg p-4 cursor-pointer;
+  }
+
+  /* Workspace layouts */
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'sidebar header'
+      'sidebar main';
+    height: 100vh;
+  }
+
+  .workspace-sidebar {
+    grid-area: sidebar;
+    @apply border-e border-border bg-card/50 backdrop-blur-xl;
+  }
+
+  .workspace-header {
+    grid-area: header;
+    @apply border-b border-border bg-card/50 backdrop-blur-xl;
+  }
+
+  .workspace-main {
+    grid-area: main;
+    @apply overflow-auto;
+  }
+
+  /* RTL Support */
+  [dir='rtl'] .workspace-grid {
+    grid-template-areas:
+      'header sidebar'
+      'main sidebar';
+  }
+
+  /* Button variants */
+  .btn-glass {
+    @apply glass glass-hover px-6 py-3 rounded-lg font-medium transition-all;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-lg font-medium transition-all shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-3 rounded-lg font-medium transition-all;
+  }
+
+  /* Card variants */
+  .card-elevated {
+    @apply bg-card rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-border;
+  }
+
+  .card-glass {
+    @apply glass-card;
+  }
+
+  /* Input styles */
+  .input-glass {
+    @apply glass rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-muted-foreground;
+  }
+
+  /* Agent status indicators */
+  .agent-status-active {
+    @apply relative;
+  }
+
+  .agent-status-active::before {
+    content: '';
+    @apply absolute -top-1 -end-1 w-3 h-3 bg-green-500 rounded-full animate-pulse;
+  }
+
+  .agent-status-thinking::before {
+    @apply bg-yellow-500;
+  }
+
+  .agent-status-error::before {
+    @apply bg-red-500;
+  }
+
+  /* Loading shimmer effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Focus visible for accessibility */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Arabic number styling */
+  .arabic-numerals {
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
+  }
+
+  /* Code block styling */
+  .code-block {
+    @apply bg-muted rounded-lg p-4 font-mono text-sm overflow-x-auto;
+  }
+
+  /* Math notation */
+  .math-expression {
+    @apply font-mono bg-muted/50 px-2 py-1 rounded;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  }
+
+  .gradient-dark {
+    background: linear-gradient(135deg, #0a0a0a 0%, #171717 100%);
+  }
+
+  /* Glow effects */
+  .glow-primary {
+    box-shadow: 0 0 20px hsla(var(--primary), 0.5);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 20px hsla(var(--secondary), 0.5);
+  }
+
+  /* Workspace panel transitions */
+  .panel-enter {
+    @apply animate-fade-in;
+  }
+
+  .panel-exit {
+    @apply animate-fade-out;
+  }
+}
+
+@layer utilities {
+  /* Spacing utilities for Arabic text */
+  .space-arabic {
+    letter-spacing: 0.01em;
+    word-spacing: 0.05em;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Text balance for better Arabic typography */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Logical properties shortcuts */
+  .ms-auto {
+    margin-inline-start: auto;
+  }
+
+  .me-auto {
+    margin-inline-end: auto;
+  }
+
+  .ps-4 {
+    padding-inline-start: 1rem;
+  }
+
+  .pe-4 {
+    padding-inline-end: 1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply text-black bg-white;
+  }
+
+  .glass, .glass-card, .glass-panel {
+    @apply bg-white border border-gray-300;
+    backdrop-filter: none;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 20%;
+  }
+
+  .dark {
+    --border: 0 0% 80%;
+  }
+}
