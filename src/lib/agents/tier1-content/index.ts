@@ -8,3 +8,4 @@
 export { VisualizerAgent } from './visualizer';
 export { SocraticAgent } from './socratic';
 export { ProblemDecomposerAgent } from './problem-decomposer';
+export { NarratorAgent } from './narrator';
